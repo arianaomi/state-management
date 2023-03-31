@@ -1,11 +1,9 @@
 import './App.css';
-import Search from './views/Search';
+import Routes from './routes'
 
 function App() {
   return (
-    <div className="App">
-      <Search/>
-    </div>
+  <Routes /> 
   );
 }
 
