@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react"
+import axios from 'axios'
+
 import SearchBox from "./components/SearchBox"
 
 import userData from '../../data/users.json'
@@ -12,12 +14,18 @@ export default function Search() {
 
   useEffect(()=>{
 
-    const getUsers = async () => {
-      const result = await fetch('https://jsonplaceholder.typicode.com/users')
-      const  dataUsers = await result.json()
-      setData(dataUsers)
+    try {
+      const getUsers = async () => {
+        // const result = await fetch('https://jsonplaceholder.typicode.com/users')
+        // const  dataUsers = await result.json()
+        // axios 
+        const {data}= axios.get('https://jsonplaceholder.typicode.com/users') 
+        setData(dataUsers)
+      }
+    } catch (error) {
+      console.error(error)
     }
-    
+
     getUsers().catch(null)
   },[])
 
