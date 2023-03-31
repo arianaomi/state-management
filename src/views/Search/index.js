@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import SearchBox from "./components/SearchBox"
 
 import userData from '../../data/users.json'
@@ -8,6 +8,18 @@ import './style.css'
 export default function Search() {
   const [isAtTop, setIsAtTop] = useState(false)
   const [results, setResults] = useState()
+  const [data, setData] = useState()
+
+  useEffect(()=>{
+
+    const getUsers = async () => {
+      const result = await fetch('https://jsonplaceholder.typicode.com/users')
+      const  dataUsers = await result.json()
+      setData(dataUsers)
+    }
+    
+    getUsers().catch(null)
+  },[])
 
   const handleCloseSearch = () => {
     setIsAtTop(false)
